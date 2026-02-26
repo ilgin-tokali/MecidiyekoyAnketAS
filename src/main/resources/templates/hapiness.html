@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hayatınızdan Memnunmusunuz?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fffde7 0%, #ffe0b2 100%);
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        .container {
+            background: #fff;
+            padding: 40px 32px 32px 32px;
+            border-radius: 18px;
+            box-shadow: 0 6px 32px rgba(60, 72, 88, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 340px;
+            max-width: 420px;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f57c00;
+            margin-bottom: 28px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        h4 {
+            color: #f57c00;
+            margin-bottom: 8px;
+            margin-top: 18px;
+        }
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        label {
+            font-weight: 500;
+            color: #f57c00;
+            margin-bottom: 2px;
+        }
+        input[type="text"], input[type="date"], input[type="number"], select, textarea {
+            padding: 10px 12px;
+            border: 1px solid #ffe0b2;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: #fffde7;
+            margin-bottom: 6px;
+            transition: border 0.2s;
+        }
+        input[type="text"]:focus, input[type="date"]:focus, input[type="number"]:focus, select:focus, textarea:focus {
+            border: 1.5px solid #f57c00;
+            outline: none;
+        }
+        textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+        button[type="submit"] {
+            margin-top: 12px;
+            padding: 14px 0;
+            background: linear-gradient(90deg, #f57c00 60%, #ffd54f 100%);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(245, 124, 0, 0.10);
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+        }
+        button[type="submit"]:hover {
+            background: linear-gradient(90deg, #ef6c00 60%, #f57c00 100%);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 18px rgba(245, 124, 0, 0.18);
+        }
+        @media (max-width: 600px) {
+            .container {
+                min-width: unset;
+                width: 95vw;
+                padding: 18px 6vw 18px 6vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hayatınızdan Memnunmusunuz?</h1>
+        <form th:action="@{/anket/happiness}" th:object="${happinessSurvey}" method="post">
+            <h4>Ankete Katılan:</h4>
+            <label for="name">Adınız:</label>
+            <input type="text" th:field="*{name}" id="name" name="name" required>
+            <label for="surname">Soyadınız:</label>
+            <input type="text" th:field="*{surname}" id="surname" name="surname" required>
+            <label for="gender">Cinsiyetiniz:</label>
+            <select th:field="*{gender}" name="gender" id="gender" required>
+                <option value="other">Seçiniz</option>
+                <option value="male">Erkek</option>
+                <option value="female">Kadın</option>
+            </select>
+            <label for="birthday">Doğum Tarihiniz:</label>
+            <input type="date" th:field="*{birthday}" id="birthday" name="birthday" required>
+            <label for="hapiness">Mutluluk Oranınız (1-10):</label>
+            <input type="number" th:field="*{hapiness}" id="hapiness" name="hapiness" max="10" min="1" required>
+            <label for="reasonforhapiness">Sizi en mutlu eden şeyler:</label>
+            <textarea th:field="*{reasonForHapiness}" name="reasonForHapiness" id="reasonforhapiness" required></textarea>
+            <label for="reasonforunhapiness">Sizi en mutsuz eden şeyler:</label>
+            <textarea th:field="*{reasonForUnhapiness}" name="reasonForUnhapiness" id="reasonforunhapiness" required></textarea>
+            <label for="description">Açıklama:</label>
+            <textarea th:field="*{description}" name="description" id="description" required></textarea>
+            <h4>Anketörün:</h4>
+            <label for="interviewer_name">Adınız:</label>
+            <input type="text" th:field="*{interviewerName}" id="interviewer_name" name="interviewerName" required>
+            <label for="interviewer_surname">Soyadınız:</label>
+            <input type="text" th:field="*{interviewerSurname}" id="interviewer_surname" name="interviewerSurname" required>
+            <button type="submit">Gönder</button>
+        </form>
+    </div>
+</body>
+</html>

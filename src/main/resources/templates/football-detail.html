@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Futbol Anketi Detayı</title>
+        <style>
+            body {
+                background: #e8f5e9;
+                color: #1b5e20;
+                font-family: 'Segoe UI', Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            div {
+                background: #ffffff;
+                border-radius: 12px;
+                box-shadow: 0 2px 8px rgba(27, 94, 32, 0.08);
+                margin: 40px auto;
+                max-width: 420px;
+                padding: 32px 28px 24px 28px;
+            }
+            h2 {
+                color: #388e3c;
+                margin-bottom: 24px;
+                text-align: center;
+            }
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0 0 24px 0;
+            }
+            li {
+                margin-bottom: 14px;
+                font-size: 1.08em;
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid #c8e6c9;
+                padding-bottom: 6px;
+            }
+            li:last-child {
+                border-bottom: none;
+            }
+            span {
+                font-weight: 500;
+            }
+            a {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                margin-right: 12px;
+                margin-top: 8px;
+                padding: 8px 18px;
+                background: #43a047;
+                color: #fff;
+                border-radius: 6px;
+                text-decoration: none;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            a:hover {
+                background: #2e7d32;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <h2>Anket Detayı</h2>
+            <ul>
+                <li><span>ID:</span> <span th:text="${footballId.id}"></span></li>
+                <li><span>Ad:</span> <span th:text="${footballId.name}"></span></li>
+                <li><span>Soyad:</span> <span th:text="${footballId.surname}"></span></li>
+                <li><span>Cinsiyet:</span> <span th:text="${footballId.gender}"></span></li>
+                <li><span>Doğum Tarihi:</span> <span th:text="${footballId.birthday}"></span></li>
+                <li><span>Takım:</span> <span th:text="${footballId.team}"></span></li>
+                <li><span>Açıklama:</span> <span th:text="${footballId.description}"></span></li>
+                <li><span>Anketör Adı:</span> <span th:text="${footballId.interviewerName}"></span></li>
+                <li><span>Anketör Soyadı:</span> <span th:text="${footballId.interviewerSurname}"></span></li>
+            </ul>
+        </div>
+        <div>
+            <a th:href="@{/completed-forms}">Anketleri Görüntüle</a>
+            <a th:href="@{/completed-forms/football/{id}/edit(id=${footballId.id})}">Anketi Düzenle</a>
+        </div>
+    </body>
+</html>

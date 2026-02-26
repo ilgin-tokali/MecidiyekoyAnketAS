@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anket Gönderildi</title>
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        .container {
+            background: #fff;
+            padding: 36px 28px 32px 28px;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(60, 72, 88, 0.10);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 340px;
+            max-width: 420px;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1976d2;
+            margin-bottom: 28px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .home-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: linear-gradient(90deg, #1976d2 60%, #42a5f5 100%);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.10);
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+        }
+        .home-btn:hover {
+            background: linear-gradient(90deg, #1565c0 60%, #1976d2 100%);
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 6px 18px rgba(25, 118, 210, 0.18);
+        }
+        .home-icon {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+        @media (max-width: 600px) {
+            .container {
+                min-width: unset;
+                width: 95vw;
+                padding: 18px 6vw 18px 6vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Anketimizi tamamladığınız için teşekkür ederiz.</h1>
+        <a th:href="@{/}" class="home-btn">
+            <svg class="home-icon" viewBox="0 0 24 24">
+                <path d="M10.707 2.293a1 1 0 0 1 1.414 0l8 8a1 1 0 0 1-1.414 1.414L20 11.414V20a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-4h-2v4a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2v-8.586l-0.293 0.293A1 1 0 0 1 2.293 10.293l8-8z"/>
+            </svg>
+        </a>
+    </div>
+</body>
+</html>

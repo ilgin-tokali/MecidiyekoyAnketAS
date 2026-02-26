@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Futbol Anketi Düzenle</title>
+        <style>
+            body {
+                background: #e8f5e9;
+                color: #1b5e20;
+                font-family: 'Segoe UI', Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                background: #ffffff;
+                border-radius: 12px;
+                box-shadow: 0 2px 8px rgba(27, 94, 32, 0.08);
+                margin: 40px auto;
+                max-width: 440px;
+                padding: 32px 28px 24px 28px;
+            }
+            h2 {
+                color: #388e3c;
+                margin-bottom: 24px;
+                text-align: center;
+            }
+            form > div {
+                margin-bottom: 18px;
+                display: flex;
+                flex-direction: column;
+            }
+            label {
+                font-weight: 500;
+                margin-bottom: 6px;
+                color: #2e7d32;
+            }
+            input[type="text"], input[type="date"] {
+                padding: 8px 10px;
+                border: 1px solid #a5d6a7;
+                border-radius: 6px;
+                font-size: 1em;
+                background: #f1f8e9;
+                color: #1b5e20;
+                transition: border 0.2s;
+            }
+            input[type="text"]:focus, input[type="date"]:focus {
+                border: 1.5px solid #43a047;
+                outline: none;
+            }
+            button[type="submit"] {
+                background: #43a047;
+                color: #fff;
+                border: none;
+                border-radius: 6px;
+                padding: 10px 0;
+                font-size: 1.08em;
+                font-weight: 500;
+                cursor: pointer;
+                margin-bottom: 8px;
+                transition: background 0.2s;
+            }
+            button[type="submit"]:hover {
+                background: #2e7d32;
+            }
+            a {
+                display: block;
+                margin-right: 10px;
+                margin-top: 8px;
+                padding: 8px 16px;
+                background: #43a04f;
+                color: #fff;
+                border-radius: 6px;
+                text-decoration: none;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+            a:hover {
+                background: #2e7d32;
+            }
+            form > div:last-child {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Anketi Düzenle</h2>
+            <form th:action="@{/completed-forms/football/{id}/edit (id=${footballId.id})}" th:object="${footballId}" method="post">
+                <div>
+                    <label>Ad:</label>
+                    <input type="text" th:field="*{name}" required/>
+                </div>
+                <div>
+                    <label>Soyad:</label>
+                    <input type="text" th:field="*{surname}" required/>
+                </div>
+                <div>
+                    <label>Cinsiyet:</label>
+                    <input type="text" th:field="*{gender}" required/>
+                </div>
+                <div>
+                    <label>Doğum Tarihi:</label>
+                    <input type="date" th:field="*{birthday}" required/>
+                </div>
+                <div>
+                    <label>Takım:</label>
+                    <input type="text" th:field="*{team}" required/>
+                </div>
+                <div>
+                    <label>Açıklama:</label>
+                    <input type="text" th:field="*{description}" required/>
+                </div>
+                <div>
+                    <label>Anketör Adı:</label>
+                    <input type="text" th:field="*{interviewerName}" required/>
+                </div>
+                <div>
+                    <label>Anketör Soyadı:</label>
+                    <input type="text" th:field="*{interviewerSurname}" required/>
+                </div>
+                <div class="button-container">
+                    <button type="submit">Güncelle</button>
+                    <a th:href="@{/completed-forms/football/{id}(id=${footballId.id})}">İptal</a>
+                    <a th:href="@{/completed-forms/football/{id}/delete(id=${footballId.id})}">Sil</a>
+                    <a th:href="@{/completed-forms}">Anketleri Görüntüle</a>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

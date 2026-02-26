@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamamlanan Formlar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(142, 36, 170, 0.08);
+            padding: 32px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #8e24aa;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 32px 0;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(142, 36, 170, 0.05);
+        }
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+        }
+        th {
+            background: #e0e0e0;
+            color: #8e24aa;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        td {
+            font-size: 1rem;
+            color: #333;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .home-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 24px;
+        }
+        .home-btn {
+            display: inline-flex;
+            margin: 24px auto 0 auto;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: linear-gradient(90deg, #8e24aa 60%, #ce93d8 100%);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.10);
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+        }
+        .home-btn:hover {
+            background: linear-gradient(90deg, #6d1b7b 60%, #8e24aa 100%);
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 6px 18px rgba(25, 118, 210, 0.18);
+        }
+        .home-icon {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tamamlanan Formlar</h1>
+        <h2>Futbol Anketleri</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ad</th>
+                    <th>Soyad</th>
+                    <th>Cinsiyet</th>
+                    <th>Doğum Tarihi</th>
+                    <th>Takım</th>
+                    <th>Açıklama</th>
+                    <th>Anketör Adı</th>
+                    <th>Anketör Soyadı</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="survey : ${footballSurveys}">
+                    <td>
+                        <a th:href="@{'/completed-forms/football/' + ${survey.id}}" th:id="'football-detail-' + ${survey.id}" th:text="${survey.id}"></a>
+                    </td>
+                    <td th:text="${survey.name}"></td>
+                    <td th:text="${survey.surname}"></td>
+                    <td th:text="${survey.gender}"></td>
+                    <td th:text="${survey.birthday}"></td>
+                    <td th:text="${survey.team}"></td>
+                    <td th:text="${survey.description}"></td>
+                    <td th:text="${survey.interviewerName}"></td>
+                    <td th:text="${survey.interviewerSurname}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Mutluluk Anketleri</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ad</th>
+                    <th>Soyad</th>
+                    <th>Cinsiyet</th>
+                    <th>Doğum Tarihi</th>
+                    <th>Mutluluk (1-10)</th>
+                    <th>Mutlu Edenler</th>
+                    <th>Mutsuz Edenler</th>
+                    <th>Açıklama</th>
+                    <th>Anketör Adı</th>
+                    <th>Anketör Soyadı</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="survey : ${happinessSurveys}">
+                    <td>
+                        <a th:href="@{'/completed-forms/happiness/' + ${survey.id}}" th:id="'happiness-detail-' + ${survey.id}" th:text="${survey.id}"></a>
+                    </td>
+                    <td th:text="${survey.name}"></td>
+                    <td th:text="${survey.surname}"></td>
+                    <td th:text="${survey.gender}"></td>
+                    <td th:text="${survey.birthday}"></td>
+                    <td th:text="${survey.hapiness}"></td>
+                    <td th:text="${survey.reasonForHapiness}"></td>
+                    <td th:text="${survey.reasonForUnhapiness}"></td>
+                    <td th:text="${survey.description}"></td>
+                    <td th:text="${survey.interviewerName}"></td>
+                    <td th:text="${survey.interviewerSurname}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="home-container">
+        <a th:href="@{/}" class="home-btn">
+            <svg class="home-icon" viewBox="0 0 24 24">
+                <path d="M10.707 2.293a1 1 0 0 1 1.414 0l8 8a1 1 0 0 1-1.414 1.414L20 11.414V20a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-4h-2v4a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2v-8.586l-0.293 0.293A1 1 0 0 1 2.293 10.293l8-8z"/>
+            </svg>
+        </a>
+    </div>
+</body>
+</html>

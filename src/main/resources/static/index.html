@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Anket Seçme Sayfası</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            body {
+                min-height: 100vh;
+                margin: 0;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #f3e7fa 0%, #e3d1f7 100%);
+                font-family: 'Roboto', Arial, sans-serif;
+            }
+            .navbar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 56px;
+                background: linear-gradient(90deg, #8e24aa 60%, #ce93d8 100%);
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                box-shadow: 0 2px 8px rgba(142, 36, 170, 0.10);
+                z-index: 1000;
+                padding: 0 32px;
+            }
+            .navbar-btn {
+                padding: 10px 24px;
+                font-size: 1rem;
+                font-weight: 600;
+                color: #fff;
+                background: #8e24aa;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgba(142, 36, 170, 0.10);
+                transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            }
+            .navbar-btn:hover {
+                background: #6d1b7b;
+                transform: translateY(-2px) scale(1.04);
+                box-shadow: 0 6px 18px rgba(142, 36, 170, 0.18);
+            }
+            .container {
+                background: #fff;
+                padding: 40px 32px 32px 32px;
+                border-radius: 18px;
+                box-shadow: 0 6px 32px rgba(60, 72, 88, 0.15);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                min-width: 340px;
+                max-width: 420px;
+                width: 100%;
+                margin: 56px auto 0 auto;
+            }
+            h1 {
+                font-size: 2.1rem;
+                font-weight: 700;
+                color: #8e24aa;
+                margin-bottom: 32px;
+                letter-spacing: 1px;
+                text-align: center;
+            }
+            .button-container {
+                display: flex;
+                gap: 28px;
+                margin-top: 10px;
+            }
+            .survey-btn {
+                padding: 18px 32px;
+                font-size: 1.1rem;
+                font-weight: 500;
+                cursor: pointer;
+                border: none;
+                border-radius: 8px;
+                background: linear-gradient(90deg, #8e24aa 60%, #ce93d8 100%);
+                color: #fff;
+                box-shadow: 0 2px 8px rgba(142, 36, 170, 0.10);
+                transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            }
+            .survey-btn:hover {
+                background: linear-gradient(90deg, #6d1b7b 60%, #8e24aa 100%);
+                transform: translateY(-2px) scale(1.04);
+                box-shadow: 0 6px 18px rgba(142, 36, 170, 0.18);
+            }
+            @media (max-width: 600px) {
+                .container {
+                    min-width: unset;
+                    width: 95vw;
+                    padding: 18px 6vw 18px 6vw;
+                }
+                .button-container {
+                    flex-direction: column;
+                    gap: 18px;
+                    width: 100%;
+                }
+                .survey-btn {
+                    width: 100%;
+                }
+                .navbar {
+                    padding: 0 10px;
+                }
+            }
+            .progress-container {
+                width: 100%;
+                background-color: #e0e0e0;
+                border-radius: 10px;
+                overflow: hidden;
+                height: 25px;
+                box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
+            }
+            .progress-bar {
+                height: 100%;
+                width: 70%;
+                background-color: #4caf50;
+                text-align: center;
+                color: white;
+                line-height: 25px;
+                font-weight: bold;
+                transition: width 0.3s ease;
+            }
+            .happiness-bar-wrapper {
+                width: 100vw;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-top: 72px;
+                margin-bottom: 32px;
+            }
+            .happiness-bar-label {
+                font-size: 1.2rem;
+                font-weight: 600;
+                color: #8e24aa;
+                margin-bottom: 8px;
+                text-align: center;
+            }
+            .happiness-bar-container {
+                width: 340px;
+                max-width: 90vw;
+                background-color: #e0e0e0;
+                border-radius: 12px;
+                overflow: hidden;
+                height: 32px;
+                box-shadow: 0 2px 8px rgba(142, 36, 170, 0.08);
+                position: relative;
+                margin: 0 auto;
+            }
+            .happiness-bar {
+                height: 100%;
+                background: linear-gradient(90deg, #388e3c 60%, #66bb6a 100%);
+                border-radius: 12px 0 0 12px;
+                transition: width 0.5s;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: #fff;
+                padding-right: 18px;
+                box-sizing: border-box;
+            }
+            .happiness-bar-percentage {
+                position: absolute;
+                right: 16px;
+                top: 0;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: #8e24aa;
+                z-index: 2;
+            }
+            .football-teams-bar-wrapper {
+                width: 100vw;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 32px;
+            }
+            .football-teams-label {
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: #8e24aa;
+                margin-bottom: 8px;
+                text-align: center;
+            }
+            .football-team-row {
+                width: 340px;
+                max-width: 90vw;
+                margin-bottom: 10px;
+            }
+            .football-team-row-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 2px;
+            }
+            .football-team-name {
+                font-weight: 500;
+            }
+            .football-team-percentage {
+                font-weight: 700;
+                color: #8e24aa;
+            }
+            .football-team-bar-container {
+                background: #e0e0e0;
+                border-radius: 8px;
+                height: 16px;
+                width: 100%;
+                overflow: hidden;
+            }
+            .football-team-bar {
+                background: #388e3c;
+                height: 100%;
+                border-radius: 8px;
+                transition: width 0.5s;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="navbar">
+            <a th:href="@{/completed-forms}">
+                <button class="navbar-btn">Tamamlanan Formlar</button>
+            </a>
+        </div>
+        <div class="happiness-bar-wrapper">
+            <div class="happiness-bar-label">Toplam Mutluluk Oranı</div>
+            <div class="happiness-bar-container">
+                <div class="happiness-bar" th:style="'width:' + ${happinessPercentage} + '%;'">
+                </div>
+                <span class="happiness-bar-percentage" th:text="${happinessPercentage} + '%'">0%</span>
+            </div>
+        </div>
+        <div class="football-teams-bar-wrapper">
+            <div class="football-teams-label">Takım Dağılımı</div>
+            <div th:each="entry : ${teamPercentage}" class="football-team-row">
+                <div class="football-team-row-header">
+                    <span th:text="${entry.key}" class="football-team-name"></span>
+                    <span th:text="${entry.value + '%'}" class="football-team-percentage"></span>
+                </div>
+                <div class="football-team-bar-container">
+                    <div class="football-team-bar" th:style="'width:' + ${entry.value} + '%;'">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h1>Anket Seçme Sayfası</h1>
+            <div class="button-container">
+                <form th:action="@{/anket/football}" method="get">
+                    <button type="submit" class="survey-btn">Tuttuğunuz Futbol Takımı</button>
+                </form>
+                <form th:action="@{/anket/happiness}" method="get">
+                    <button type="submit" class="survey-btn">Hayatınızdan Memnunmusunuz?</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
